@@ -1,0 +1,48 @@
+<h2>{{ showSignUp ? 'Sign up' : 'Login' }}</h2>
+<form>
+  <div class="row">
+    <div *ngIf="showSignUp" class="input-group col-md-3" >
+        <label>Admin</label>
+        <input type="checkbox" class="form-control" name="admin" (click)="toggleAdmin()">
+        <label>Manager</label>
+        <input type="checkbox" class="form-control" name="Manager" (click)="toggleManager()">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div>
+      </div>
+      <label>UserName</label>
+      <input type="text" class="form-control" [(ngModel)]="UserName" name="UserName" />
+      <label>Password</label>
+      <input type="text" class="form-control" [(ngModel)]="Password" name="Password" />
+      <div *ngIf="isAdmin">
+          <h2>Tavern</h2>
+          <label>TavernName</label>
+          <input type="text" class="form-control" [(ngModel)]="TavernName" name="TavernName" />
+      </div>
+      <div *ngIf="isManager">
+          <h2>Tavern</h2>
+          <select class="form-control" [(ngModel)]="TavernName" name="tavern">
+            <option [ngValue]="undefined" disabled>Select Tavern</option>
+            <option *ngFor='let tavern of taverns'>{{tavern.TavernName}}</option>
+          </select>
+      </div>
+    </div>
+    <div class="col-md-6"></div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-6">
+      <button *ngIf="!showSignUp" type="submit" class="btn btn-primary" (click)="login()">
+        Submit
+      </button>
+      <button *ngIf="showSignUp" type="submit" class="btn btn-primary" (click)="signup()">
+        Sign up
+      </button>
+      <button type="button" class="btn btn-secondary float-right" (click)="toggleSignup()" >
+        {{ showSignUp ? 'Cancel' : 'Sign up' }}
+      </button>
+    </div>
+  </div>
+</form>
